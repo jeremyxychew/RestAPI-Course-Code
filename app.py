@@ -19,12 +19,6 @@ app.secret_key = 'jeremy'
 api = Api(app)
 
 
-# run method directly before @app.before_first_request decorator before the first request is made
-@app.before_first_request
-def create_table():
-    db.create_all()
-
-
 # JWT - creates new endpoint /auth
 # pass app = Flask(__name__), & functions authenticate and identity from security.py
 jwt = JWT(app, authenticate, identity)
