@@ -1,0 +1,4 @@
+## THINGS THAT WE DONT WANT IN GITHUB FOLDER
+
+__pycache__/
+*.pyc
