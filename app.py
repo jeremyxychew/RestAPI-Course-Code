@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 # reqparse - update variables that have been requested to change (PUT req)
 from flask_restful import Api
@@ -10,8 +12,9 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
 app = Flask(__name__)
-# SQLAlchemy DB is going to live at root folder of our project
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+# IF 'DATABASE_URL' is not found in system, then sqlite:///data.db will be used as default db (e.g. when doing offline testing, online DB won't be available hence use sqlite DB)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    'DATABASE_URL', 'sqlite:///data.db')
 # Turn off flask-SQLAlchemy modification tracker because SQLAlchemy main library has its own modification tracker (which is better)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # QUESTION: what is app.secret_key for ?
